@@ -24,7 +24,7 @@ norm_window: -5000 5000 #window around each site for normalizing to 1 (-5000 500
 plot_window: -1000 1000 #window around each site to be exported for plotting(-1000 1000 bp for typical TFBS WGS analysis)
 fragment_length: 165 #only used for the smoothing window
 step: 15 #bin size for saving data 15bp seems to work well, smaller leads to noisier output, much larger might obscure peaks 
-size_range: 100 200 #range of fragment lengths to be used for analysis. 100 to 200 captures the majority of data for a typical sample. 0 to 500 also okay. 
+size_range: 100 200 #range of fragment lengths to be used for analysis. 100 to 200 captures nucleosome sized fragments. 15 to 500 also okay. 
 map_quality: 20 #minimum mapping quality to keep a read
 strand_column: Strand #column for indicating site direction. If this column doesn't exist, the script will assume non-directional sites. 
 
