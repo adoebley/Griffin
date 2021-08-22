@@ -1,0 +1,25 @@
+#griffin_nucleosome_profiling.snakefile
+#Anna-Lisa Doebley
+#Template made 2021-04-12
+#Ha Lab
+#Fred Hutchinson Cancer Research Center
+
+__default__:
+    partition: campus-new
+    time: "24:0:0"
+    mem: 4G
+    ncpus: 1
+    ntasks: 1
+    output: logs/cluster/{rule}.{wildcards.samples}.%A.out
+    JobName: "{rule}.{wildcards.samples}"
+
+calc_cov:   
+    partition: campus-new
+    mem: 4G
+    ncpus: 2 #can parallelize each list of sites. Use more cores if you have more lists of site and want them to run in parallel
+    output: logs/cluster/{rule}.{wildcards.samples}.%A.out
+    JobName: "{rule}.{wildcards.samples}"
+
+generate_plots:
+    output: logs/cluster/{rule}.%A.out
+    JobName: "{rule}"  

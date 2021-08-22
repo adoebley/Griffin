@@ -1,0 +1,40 @@
+#griffin_nucleosome_profiling.snakefile
+#Anna-Lisa Doebley
+#Template made 2021-04-12
+#Ha Lab
+#Fred Hutchinson Cancer Research Center
+
+
+###############
+#config files##
+###############
+cluster_slurm: config/cluster_slurm.yaml #used to get info about available CPU for the calc_cov step
+sites_yaml: config/sites.yaml #used to run calc coverage step on all sites
+
+
+#############################################
+#params for nucleosome profiling#############
+#############################################
+results_dir: results #where your results will go (inside the snakemake folder)
+reference_genome: /fh/fast/ha_g/grp/reference/GRCh38/GRCh38.fa #use hg38
+
+chrom_column: Chrom #column containing the chromosome in your sites file
+chroms: chr1 chr2 chr3 chr4 chr5 chr6 chr7 chr8 chr9 chr10 chr11 chr12 chr13 chr14 chr15 chr16 chr17 chr18 chr19 chr20 chr21 chr22
+norm_window: -5000 5000 #window around each site for normalizing to 1 (-5000 5000 bp for typical TFBS WGS analysis)
+plot_window: -1000 1000 #window around each site to be exported for plotting(-1000 1000 bp for typical TFBS WGS analysis)
+fragment_length: 165
+step: 15 #bin size for saving data 15bp seems to work well, smaller leads to noisier output, much larger might obscure peaks 
+size_range: 100 200 #range of fragment lengths to be used for analysis. 100 to 200 captures the majority of data for a typical sample. 0 to 500 also okay. 
+map_quality: 20 #minimum mapping quality to keep a read
+strand_column: Strand #column for indicating site direction. If this column doesn't exist, the script will assume non-directional sites. 
+
+individual: False #whether to export individual site coverage or merge all sites for a mean coverage value. True results in huge outputs, use only for small analyses.
+smoothing: True #whether to smooth coverage profiles with a savgol filter (recommended in most cases)
+background_normalization: None #whether to locally normalize each site (None or local) 
+
+number_of_sites: none #how many sites to analyze. use NA/none to analyze all sites
+sort_by: none #column to use for sorting sites use none if analyzing all sites
+ascending: none #True/False #whether to sort sites in ascending order (False if you want to keep sites with a large value in the sort_by column), use NA/none to analyze all sites
+
+
+

@@ -1,0 +1,15 @@
+#griffin_GC_frequency.snakefile
+#Anna-Lisa Doebley
+#Template made 2021-04-06
+#Ha Lab
+#Fred Hutchinson Cancer Research Center
+
+__default__:
+    partition: campus-new
+    time: "72:0:0"
+    mem: 4G
+    ncpus: 1
+    ntasks: 1
+    output: logs/cluster/{rule}.{wildcards.length}.%A.out
+    JobName: "{rule}.{wildcards.length}.%A"
+
