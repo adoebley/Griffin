@@ -28,8 +28,8 @@ To run Griffin, use the snakemakes in the the 'snakemakes' directory
         A config file for use in the nucleosome profiling step
       
 3. griffin_filter_sites
-    If using a new set of sites (not previously filtered) you will need to filter them to remove low mapability site
-    If you have your own strategy for removing low mapability sites, you can skip this step but will need to add a column with the header 'position' to your sites file for subsequent steps
+    If using a new set of sites (not previously filtered) you will need to filter them to remove low mappability site
+    If you have your own strategy for removing low mappability sites, you can skip this step but will need to add a column with the header 'position' to your sites file for subsequent steps
     To run this step:
       Create a sites.yaml with paths to your lists of sites and place it in config (see config/example_sites.yaml for format)
       Site lists must be tab separated with a header at the top. At a minimum they must contain columns with the chromosome and position
