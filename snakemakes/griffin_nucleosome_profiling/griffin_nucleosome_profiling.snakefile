@@ -8,7 +8,7 @@
 #before running snakemake, do in tmux terminal:
 ml snakemake/5.19.2-foss-2019b-Python-3.7.4
 ml Python/3.7.4-foss-2019b-fh1 #this loads deeptools
-PATH="$PATH:/fh/fast/ha_g/user/adoebley/projects/griffin_paper/scripts/"
+PATH="$PATH:/fh/fast/ha_g/user/adoebley/projects/griffin_paper/Griffin/scripts/"
 
 
 #command to run snakemake (remove -np at end when done validating):
