@@ -70,7 +70,7 @@ To run Griffin, use the snakemakes in the the 'snakemakes' directory
             These folders contain intermediate files with the coverage profiles for individual site lists. These have been concatenated into results/coverage/all_site/<sample_name>.all_sites.coverage.txt
                   
 
-##Software License
+##Software License  
 Griffin Copyright (c) 2021 Fred Hutchinson Cancer Research Center  
 All rights reserved.  
 
