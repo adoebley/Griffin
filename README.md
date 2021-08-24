@@ -69,3 +69,13 @@ To run Griffin, use the snakemakes in the the 'snakemakes' directory
           results/coverage/<site_name>/<sample_name>.<site_name>.coverage.txt
             These folders contain intermediate files with the coverage profiles for individual site lists. These have been concatenated into results/coverage/all_site/<sample_name>.all_sites.coverage.txt
                   
+
+
+Griffin Copyright (c) 2021 Fred Hutchinson Cancer Research Center  
+All rights reserved.  
+
+This program is free software: you can redistribute it and/or modify it under the terms of the BSD-3-Clause-Clear license. No licenses are granted to any patent rights of the Fred Hutchinson Cancer Research Center.  
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the BSD-3-Clause-Clear license for more details.  
+
+You should have received a copy of the G BSD-3-Clause-Clear license along with this program. If not, see https://spdx.org/licenses/BSD-3-Clause-Clear.html. 
