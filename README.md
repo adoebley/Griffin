@@ -68,7 +68,15 @@ To run Griffin, use the snakemakes in the the 'snakemakes' directory
           Both GC corrected and non-GC corrected profiles are in this file and must be separated for downstream analysis (GC_correction column). Coverage profile data is labeled with the start coordinate of the bin. For instance, the column labeled -15 contains the coverage information for -15bp to 0bp relative to the site location.  
           results/coverage/<site_name>/<sample_name>.<site_name>.coverage.txt  
             These folders contain intermediate files with the coverage profiles for individual site lists. These have been concatenated into results/coverage/all_site/<sample_name>.all_sites.coverage.txt  
-                  
+
+## Versions of packages used for testing  
+argparse 1.1  
+pandas 1.2.4  
+pysam 0.15.4  
+numpy 1.21.2  
+scipy 1.7.1  
+pyyaml 5.3.1  
+pyBigWig 0.3.17  
 
 ## Software License   
 Griffin Copyright (c) 2021 Fred Hutchinson Cancer Research Center  
