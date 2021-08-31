@@ -70,13 +70,15 @@ To run Griffin, use the snakemakes in the the 'snakemakes' directory
             These folders contain intermediate files with the coverage profiles for individual site lists. These have been concatenated into results/coverage/all_site/<sample_name>.all_sites.coverage.txt  
 
 ## Versions of packages used for testing  
-argparse 1.1  
+argparse 1.1 
+pysam 0.15.4   
+pyBigWig 0.3.17  
 pandas 1.2.4  
-pysam 0.15.4  
 numpy 1.21.2  
 scipy 1.7.1  
 pyyaml 5.3.1  
-pyBigWig 0.3.17  
+snakemake 5.5.4
+python 3.7.4
 
 ## Software License   
 Griffin Copyright (c) 2021 Fred Hutchinson Cancer Research Center  
