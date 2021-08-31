@@ -13,3 +13,5 @@ The file was then converted to bam, realigned to hg38 (http://hgdownload.soe.ucs
 
 #downsample took 116 minutes and resulted in a 1.21gb file
 time /app/software/Java/1.8.0_181/bin/java -jar $EBROOTPICARD/picard.jar DownsampleSam I=/fh/scratch/delete90/ha_g/realigned_bams/cfDNA_cancer_Snyder_hg38/results/Healthy_GSM1833219/Healthy_GSM1833219_recalibrated.bam O=downsample/Healthy_GSM1833219_downsampled.bam P=0.004
+
+
