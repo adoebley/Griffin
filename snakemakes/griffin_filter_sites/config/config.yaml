@@ -7,7 +7,7 @@
 #SELECT CORRECT MAPABILITY DATA
 #must match genome
 mapability_track:
-    /fh/fast/ha_g/user/adoebley/projects/griffin_paper/downloads/genome/k50.Umap.MultiTrackMappability.hg38.bw
+    /path/to/k50.Umap.MultiTrackMappability.hg38.bw
 
 #select where the bed files will go after splitting by mapability
 split_by_mapability_dir:
@@ -23,4 +23,4 @@ norm_window_values: -5000 5000
 targeted_panel: False #if targeted panel, drop sites that don't span the full normalization window
 targeted_window_columns: NA NA #if targeted panel, specify column names for columns containing the start and end of the targeted range
 
-threshold: 0.95
+threshold: 0.95 #minimum mapability to keep a site
