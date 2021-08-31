@@ -56,7 +56,7 @@ griffin_filter_sites
 6. Open the sites.yaml (run_demo/griffin_filter_sites/config/sites.yaml) and update the path to the demo sites file:
 	CTCF_demo: ../../demo/griffin_filter_sites_demo_files/input/CTCF.hg38.2000demo.txt
 
-7. Run the snakemake:
+7. Run the snakemake (expected runtime 11 seconds):
 	snakemake -s griffin_filter_sites.snakefile -np #dry run to print a list of jobs
 	snakemake -s griffin_filter_sites.snakefile
 
