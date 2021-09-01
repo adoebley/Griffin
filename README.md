@@ -77,6 +77,7 @@ pandas 1.2.4
 numpy 1.21.2  
 scipy 1.7.1  
 pyyaml 5.3.1  
+matplotlib 3.4.1
 snakemake 5.5.4
 python 3.7.4
 

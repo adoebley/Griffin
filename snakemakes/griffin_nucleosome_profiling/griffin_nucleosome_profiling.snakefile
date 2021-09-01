@@ -27,7 +27,7 @@ configfile: "config/cluster_slurm.yaml"
 rule all:
 	input: #commented out files are produced at the same time as other files
 		expand("{results_dir}/coverage/all_sites/{samples}.all_sites.coverage.txt",results_dir=config['results_dir'],samples=config['samples']),
-		#expand("{results_dir}/plots/{site_files}.nucleosome_center.pdf", results_dir = config['results_dir'], site_files = config['site_files'])
+		expand("{results_dir}/plots/{site_files}.pdf", results_dir = config['results_dir'], site_files = config['site_files'])
 
 rule calc_cov:
 	input:
@@ -73,4 +73,21 @@ rule calc_cov:
 		--strand_column {params.strand_col} --individual {params.individual} --smoothing {params.smoothing} \
 		--num_sites {params.number_of_sites} --sort_by {params.sort_by} --ascending {params.ascending} \
 		--cpu {params.cpus} "
+
+
+rule generate_plots:
+	input:
+		cov_files = expand("{results_dir}/coverage/all_sites/{samples}.all_sites.coverage.txt", results_dir = config['results_dir'], samples = config['samples'])
+	output:
+		plots = expand("{results_dir}/plots/{site_files}.pdf", results_dir = config['results_dir'], site_files = config['site_files'])
+	params:
+		plot_window=config['plot_window'],
+		fragment_length=config['fragment_length'],
+		step=config['step'],
+		individual=config['individual'],
+		results_dir=config['results_dir']
+	shell:
+		'griffin_plot.py --in_files {input.cov_files} --plot_window {params.plot_window} \
+		--step {params.step} --individual {params.individual} --out_dir {params.results_dir}'
+
 
