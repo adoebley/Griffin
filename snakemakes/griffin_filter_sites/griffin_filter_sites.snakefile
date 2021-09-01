@@ -6,7 +6,7 @@
 
 """
 #before running snakemake, do in terminal:
-PATH="$PATH:/path/to/scripts/"
+PATH="$PATH:/path/to/Griffin/scripts/"
 
 
 #command to run snakemake (remove -np at end when done validating):

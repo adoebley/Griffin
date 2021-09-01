@@ -16,7 +16,7 @@ sites_yaml: config/sites.yaml #used to run calc coverage step on all sites
 #params for nucleosome profiling#############
 #############################################
 results_dir: results #where your results will go (inside the snakemake folder)
-reference_genome: /fh/fast/ha_g/grp/reference/GRCh38/GRCh38.fa #use hg38
+reference_genome: /path/to/hg38.fa #use hg38
 
 chrom_column: Chrom #column containing the chromosome in your sites file
 chroms: chr1 chr2 chr3 chr4 chr5 chr6 chr7 chr8 chr9 chr10 chr11 chr12 chr13 chr14 chr15 chr16 chr17 chr18 chr19 chr20 chr21 chr22
