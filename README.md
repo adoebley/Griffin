@@ -3,7 +3,7 @@ A flexible framework for nucleosome profiling of cell-free DNA
 
 
 ## Description
-To run Griffin, use the snakemakes in the the 'snakemakes' directory 
+To run Griffin, use the snakemakes in the the 'snakemakes' directory  
 See the Wiki for further instructions
 
 1. griffin_genome_GC_frequncy  
