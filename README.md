@@ -81,18 +81,6 @@ snakemake 5.5.4
 python 3.7.4
 
 
-## Acknowledgements 
-
-This work was done in collaboration with  
-- Laboratory of **Gavin Ha**, Division of Public Health Sciences, Fred Hutchinson Cancer Research Center
-- Laboratory of **David MacPherson**, Division of Public Health Sciences, Fred Hutchinson Cancer Research Center
-- Laboratory of **Daniel G. Stover**, Ohio State University Comprehensive Cancer Center
-- Laboratory of **Heather A. Parsons**, Dana-Farber Cancer Institute
-- Laboratory of **Peter S. Nelson**, Division of Public Health Sciences, Fred Hutchinson Cancer Research Center
-- **Blood Biopsy Group**, Group Leader **Viktor Adalsteinsson**, Broad Institute of MIT and Harvard
-- Laboratory of **Paz Polak**, Department of Oncological Sciences, Icahn School of Medicine, Mount Sinai
-
-
 ## Software License   
 Griffin Copyright (c) 2021 Fred Hutchinson Cancer Research Center  
 All rights reserved.  
