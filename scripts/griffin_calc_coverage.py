@@ -49,6 +49,7 @@ from multiprocessing import Pool
 # strand_col = 'Strand'
 
 # individual = 'False'
+# smoothing = 'True'
 
 # number_of_sites = 1000
 # sort_by = 'Chrom'
@@ -56,6 +57,7 @@ from multiprocessing import Pool
 # ascending = 'False'
 
 # CPU = 4
+# erase_intermediates = 'True'
 
 # debugging = True
 
@@ -93,6 +95,7 @@ parser.add_argument('--sort_by',help='how to select the sites to analyze', defau
 parser.add_argument('--ascending',help='whether to sort in ascending or descending order when selecting sites', default='NA')
 
 parser.add_argument('--cpu',help='cpu available for parallelizing', type = int, required = True)
+parser.add_argument('--erase_intermediates',help='whether to erase intermediate files to save space', type = str, default = 'True')
 
 
 args = parser.parse_args()
@@ -126,6 +129,7 @@ sort_by=args.sort_by
 ascending=args.ascending
 
 CPU = args.cpu
+erase_intermediates = args.erase_intermediates
 
 debugging = False
 
@@ -282,7 +286,7 @@ def collect_fragments(sites,window_start,window_end,direction):
     ref_seq=pysam.FastaFile(ref_seq_path)
 
     #extend the window by half the max fragment length in each direction
-    max_adjustment = np.int(np.ceil(sz_range[1]/2))
+    max_adjustment = int(np.ceil(sz_range[1]/2))
     adjusted_start = window_start-max_adjustment
     adjusted_end = window_end+max_adjustment
     
@@ -435,6 +439,14 @@ def collect_fragments(sites,window_start,window_end,direction):
 # In[ ]:
 
 
+if not os.path.exists(results_dir+'/coverage/'):
+        os.mkdir(results_dir+'/coverage/')
+        print('output directory created:',results_dir+'/coverage/')
+
+
+# In[ ]:
+
+
 def run_full_analysis(input_items):
     site_name,site_file = input_items
 
@@ -449,10 +461,13 @@ def run_full_analysis(input_items):
         print('analyzing:',site_name)
 
     #make any necessary directorys for output
-    try: 
+    if not os.path.exists(results_dir+'/coverage/'):
+        os.mkdir(results_dir+'/coverage/')
+        print('output directory created:',results_dir+'/coverage/')
+    elif not os.path.exists(results_dir+'/coverage/'+site_name):
         os.mkdir(results_dir+'/coverage/'+site_name)
         print('output directory created:',results_dir+'/coverage/'+site_name)
-    except:
+    else:
         print('output directory already exists:',results_dir+'/coverage/'+site_name)
         pass
 
@@ -645,25 +660,6 @@ def run_full_analysis(input_items):
 # In[ ]:
 
 
-# #cell for testing
-# #start the timer
-# start_time=time.time()
-
-# #for testing use a single CPU
-# final_data=run_full_analysis(to_do_list[0])
-
-
-# In[ ]:
-
-
-# ##plot for testing
-# current = final_data[(final_data['endpoint']=='midpoint') & (final_data['GC_correction']=='GC_corrected')][plot_columns].mean()
-# plt.plot(plot_columns,current)
-
-
-# In[ ]:
-
-
 #run the analysis 
 
 #start the timer
@@ -681,10 +677,9 @@ start_time = time.time()
 
 # merge results together and export
 merged_out_file = results_dir+'/coverage/all_sites/'+sample_name+'.all_sites.coverage.txt'
-try: #make any necessary directorys for output
+if not os.path.exists(results_dir+'/coverage/all_sites'): #make any necessary directories for output
     os.mkdir(results_dir+'/coverage/all_sites')
-except:
-    pass 
+
 merged_output=pd.DataFrame()
 for j,line in enumerate(to_do_list):
     if j%50 == 0:
@@ -697,8 +692,33 @@ for j,line in enumerate(to_do_list):
 
 merged_output.columns
 merged_output.to_csv(merged_out_file,sep='\t',index=False)
-        
+
+if erase_intermediates.lower()=='true':
+    for j,line in enumerate(to_do_list):
+        site_name = line[0]
+        indiv_out_file = results_dir+'/coverage/'+site_name+'/'+sample_name+'.'+site_name+'.coverage.txt'
+        os.remove(indiv_out_file)
+
 print('done with merge')
+
+
+# In[ ]:
+
+
+# #cell for testing
+# #start the timer
+# start_time=time.time()
+
+# #for testing use a single CPU
+# final_data=run_full_analysis(to_do_list[0])
+
+
+# In[ ]:
+
+
+# ##plot for testing
+# current = final_data[(final_data['endpoint']=='midpoint') & (final_data['GC_correction']=='GC_corrected')][plot_columns].mean()
+# plt.plot(plot_columns,current)
 
 
 # In[ ]:
