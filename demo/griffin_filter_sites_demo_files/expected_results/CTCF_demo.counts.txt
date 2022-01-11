@@ -1,0 +1,2 @@
+total_sites	high	low	mean_mapability
+2000	1000	1000	0.9313073039323208

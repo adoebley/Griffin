@@ -1,0 +1,4 @@
+length	num_GC	number_of_fragments
+2	0	450221013
+2	1	644927761
+2	2	197026159
