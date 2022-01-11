@@ -1,0 +1,64 @@
+#griffin_nucleosome_profiling.snakefile
+#Anna-Lisa Doebley
+#Template made 2021-12-12
+#Ha Lab
+#Fred Hutchinson Cancer Research Center
+
+
+###############
+#config files##
+###############
+cluster_slurm: config/cluster_slurm.yaml #used to get info about available CPU for the calc_cov step
+sites_yaml: config/sites.yaml #used to run calc coverage step on all sites
+samples_yaml: config/samples.GC.yaml #for plotting
+griffin_scripts_dir: /fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/Griffin/scripts
+
+#############################################
+#params for griffin_converage ###############
+#############################################
+tmp_dir: tmp #where your temporary outputs will go (may be large)
+
+reference_genome: /fh/fast/ha_g/grp/reference/GRCh38/GRCh38.fa #use hg38
+mappability_bw: /fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/genome/k100.Umap.MultiTrackMappability.hg38.bw
+chrom_sizes_path: /fh/fast/ha_g/grp/reference/GRCh38/hg38.standard.chrom.sizes
+
+chrom_column: Chrom #column containing the chromosome in your sites file
+position_column: position #column containing the site position
+strand_column: Strand #column for indicating site direction. If this column doesn't exist, the script will assume non-directional sites. 
+chroms: chr1 chr2 chr3 chr4 chr5 chr6 chr7 chr8 chr9 chr10 chr11 chr12 chr13 chr14 chr15 chr16 chr17 chr18 chr19 chr20 chr21 chr22
+
+norm_window: -5000 5000 #window around each site for normalizing to 1 (-5000 5000 bp for typical TFBS WGS analysis)
+size_range: 100 200 #range of fragment lengths to be used for analysis. 100 to 200 captures nucleosome sized fragments. 15 to 500 also okay. 
+map_quality: 20 #minimum mapping quality to keep a read
+
+number_of_sites: none #how many sites to analyze. use NA/none to analyze all sites
+sort_by: none #column to use for sorting sites use none if analyzing all sites
+ascending: none #True/False #whether to sort sites in ascending order (False if you want to keep sites with a large value in the sort_by column), use NA/none to analyze all sites
+
+#############################################
+#additional params for griffin_merge ########
+#############################################
+
+results_dir: results
+
+save_window: -1000 1000 #window around each site to save to outputs
+center_window: -30 30 #range of positions used to calculate the central coverage feature
+fft_window: -960 960 
+fft_index: 10 
+smoothing_length: 165 #approximately the fragment length
+
+#bed files containing regions to exclude
+encode_exclude: /fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/genome/encode_unified_GRCh38_exclusion_list.bed
+centromeres: /fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/genome/hg38_centromeres.bed
+gaps: /fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/genome/hg38_gaps.bed
+patches: /fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/genome/hg38_fix_patches.bed
+alternative_haplotypes: /fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/genome/hg38_alternative_haplotypes.bed
+
+step: 15
+
+CNA_normalization: False
+individual: False
+smoothing: True
+
+exclude_zero_mappability: True
+exclude_outliers: True

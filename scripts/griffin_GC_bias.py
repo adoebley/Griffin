@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 import pysam
@@ -15,15 +15,15 @@ import sys
 from matplotlib import pyplot as plt
 
 
-# In[ ]:
+# In[2]:
 
 
 # %matplotlib inline
 
 # bam_file_name = 'MBC_1041_1_ULP'
-# mapable_name = 'repeat_masker.mapable.k50.Umap.hg38'
-# genome_GC_frequency = '/fh/fast/ha_g/user/adoebley/projects/griffin_paper/genome_GC_frequency/results'
-# out_dir = 'tmp'
+# mappable_name = 'k100_exclusion_lists.mappable_regions'
+# genome_GC_frequency = '/fh/fast/ha_g/user/adoebley/projects/nucleosome_profiling_griffin/add_mappability_3/snakemake/griffin_genome_GC_frequency/results/'
+# in_dir = 'tmp'
 # size_range = [15,500]
 
 
@@ -34,7 +34,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--bam_file_name', help='sample name (does not need to match actual file name)', required=True)
 
-parser.add_argument('--mapable_name', help='name of mapable regions file (with .bed removed)', required=True)
+parser.add_argument('--mappable_name', help='name of mappable regions file (with .bed removed)', required=True)
 
 parser.add_argument('--genome_GC_frequency',help='folder containing GC counts in the reference sequence (made by generate_reference_files.snakemake)',required=True)
 
@@ -45,19 +45,19 @@ parser.add_argument('--size_range',help='range of read sizes to be included',nar
 args = parser.parse_args()
 
 bam_file_name = args.bam_file_name
-mapable_name=args.mapable_name
+mappable_name=args.mappable_name
 genome_GC_frequency = args.genome_GC_frequency
 out_dir = args.out_dir
 size_range = args.size_range
 
 
-# In[ ]:
+# In[3]:
 
 
 print('arguments provided:')
 
 print('\tbam_file_name = "'+bam_file_name+'"')
-print('\tmapable_name = "'+mapable_name+'"')
+print('\tmappable_name = "'+mappable_name+'"')
 
 print('\tgenome_GC_frequency = "'+genome_GC_frequency+'"')
 out_dir = out_dir.rstrip('/')
@@ -66,47 +66,47 @@ print('\tout_dir = "'+out_dir+'"')
 print('\tsize_range = '+str(size_range))
 
 
-# In[ ]:
+# In[4]:
 
 
 #For now I'm going to keep the smoothing bin size as a set variable
 GC_smoothing_step = 20
 
 
-# In[ ]:
+# In[5]:
 
 
 #input is the out_file from the previous step
-in_file = out_dir +'/'+mapable_name+'/GC_counts/'+ bam_file_name+'.GC_counts.txt'
+in_file = out_dir +'/GC_counts/'+ bam_file_name+'.GC_counts.txt'
 print('in_file:',in_file)
 
 #output is smoothed version
-smoothed_out_file = out_dir +'/'+mapable_name+'/GC_bias/'+ bam_file_name+'.GC_bias.txt'
+smoothed_out_file = out_dir +'/GC_bias/'+ bam_file_name+'.GC_bias.txt'
 
 #plot files
-plot_file1 = out_dir +'/'+mapable_name+'/GC_plots/'+ bam_file_name+'.GC_bias.pdf'
-plot_file2 = out_dir +'/'+mapable_name+'/GC_plots/'+ bam_file_name+'.GC_bias.summary.pdf'
-plot_file3 = out_dir +'/'+mapable_name+'/GC_plots/'+ bam_file_name+'.GC_bias.key_lengths.pdf'
+plot_file1 = out_dir +'/GC_plots/'+ bam_file_name+'.GC_bias.pdf'
+plot_file2 = out_dir +'/GC_plots/'+ bam_file_name+'.GC_bias.summary.pdf'
+plot_file3 = out_dir +'/GC_plots/'+ bam_file_name+'.GC_bias.key_lengths.pdf'
 
 print('out_file:',smoothed_out_file)
 sys.stdout.flush()
 
 
-# In[ ]:
+# In[6]:
 
 
 #create output folders if needed
-if not os.path.exists(out_dir +'/'+mapable_name+'/GC_plots/'):
-    os.mkdir(out_dir +'/'+mapable_name+'/GC_plots/')
-if not os.path.exists(out_dir +'/'+mapable_name+'/GC_bias/'):
-    os.mkdir(out_dir +'/'+mapable_name+'/GC_bias/')
+if not os.path.exists(out_dir +'/GC_plots/'):
+    os.mkdir(out_dir +'/GC_plots/')
+if not os.path.exists(out_dir +'/GC_bias/'):
+    os.mkdir(out_dir +'/GC_bias/')
 
 
-# In[ ]:
+# In[7]:
 
 
 #import the GC info from the genome
-frequency_prefix = genome_GC_frequency+'/'+mapable_name+'.'
+frequency_prefix = genome_GC_frequency+'/'+mappable_name+'.'
 
 GC_freq = pd.DataFrame()
 for i in range(size_range[0],size_range[1]+1):
@@ -118,7 +118,7 @@ GC_freq['GC_content']=GC_freq['num_GC']/GC_freq['length']
 GC_freq = GC_freq.sort_values(by=['GC_content','length']).reset_index(drop=True)
 
 
-# In[ ]:
+# In[8]:
 
 
 #import GC counts from the sample
@@ -128,7 +128,7 @@ GC_df['GC_content']=GC_df['num_GC']/GC_df['length']
 GC_df = GC_df.sort_values(by=['GC_content','length']).reset_index(drop=True)
 
 
-# In[ ]:
+# In[9]:
 
 
 #calculate the GC_bias
@@ -153,7 +153,7 @@ for length in range(size_range[0],size_range[1]+1):
 new_df = new_df.sort_values(by=['GC_content','length']).reset_index(drop=True)
 
 
-# In[ ]:
+# In[10]:
 
 
 def median_smoothing(current,fraction):
@@ -184,7 +184,7 @@ def median_smoothing(current,fraction):
 
 
 
-# In[ ]:
+# In[11]:
 
 
 #smooth GC bias by size bin
@@ -223,20 +223,14 @@ for length in new_df['length'].unique():
 new_df = new_df2
 
 
-# In[ ]:
-
-
-new_df[new_df['length']==200]#['GC_bias'].sum()/len(new_df[new_df['length']==200])
-
-
-# In[ ]:
+# In[12]:
 
 
 #export results
 new_df2.to_csv(smoothed_out_file,sep='\t',index=False)
 
 
-# In[ ]:
+# In[13]:
 
 
 #generate one plot per size bin
@@ -285,7 +279,7 @@ for i in range(y_dim):
 ylim = axes[0,0].get_ylim()
 
 old_title = axes[0,0].get_title()
-axes[0,0].set_title(bam_file_name+'\n'+mapable_name + '\n' + old_title)
+axes[0,0].set_title(bam_file_name+'\n'+mappable_name + '\n' + old_title)
 
 fig.tight_layout()
 
@@ -294,7 +288,7 @@ plt.savefig(plot_file1)
 plt.close('all')
 
 
-# In[ ]:
+# In[14]:
 
 
 #key lengths
@@ -313,14 +307,14 @@ ax.legend(ncol = 2, bbox_to_anchor = [1,1], loc = 'upper left')
 
 ax.set_xlabel('GC content')
 ax.set_ylabel('coverage bias')
-ax.set_title(bam_file_name+'\n'+mapable_name)
+ax.set_title(bam_file_name+'\n'+mappable_name)
 
 fig.tight_layout()
 fig.savefig(plot_file3)
 plt.close('all')
 
 
-# In[ ]:
+# In[15]:
 
 
 #summary figure
@@ -335,7 +329,7 @@ ax.legend(ncol = 2, bbox_to_anchor = [1,1], loc = 'upper left')
 
 ax.set_xlabel('GC content')
 ax.set_ylabel('coverage bias')
-ax.set_title(bam_file_name+'\n'+mapable_name)
+ax.set_title(bam_file_name+'\n'+mappable_name)
 
 fig.tight_layout()
 fig.savefig(plot_file2)
@@ -351,7 +345,7 @@ plt.close('all')
 # In[ ]:
 
 
-# plot_file4 = out_dir +'/'+mapable_name+'/GC_plots/'+ bam_file_name+'.GC_bias.test.pdf'
+# plot_file4 = out_dir +'/'+mappable_name+'/GC_plots/'+ bam_file_name+'.GC_bias.test.pdf'
 
 # selected_lengths = np.arange(size_range[0],size_range[1],GC_smoothing_step)
 
@@ -377,7 +371,7 @@ plt.close('all')
 
 # ax.set_xlabel('GC content')
 # ax.set_ylabel('coverage bias')
-# ax.set_title(bam_file_name+'\n'+mapable_name)
+# ax.set_title(bam_file_name+'\n'+mappable_name)
 # ax.set_ylim(-.1,new_df2['smoothed_GC_bias'].max()+.1)
 
 # fig.tight_layout()
@@ -389,7 +383,7 @@ plt.close('all')
 
 # #generate one plot per size bin
 # #raw_data
-# plot_file4 = out_dir +'/'+mapable_name+'/GC_plots/'+ bam_file_name+'.GC_bias.test.pdf'
+# plot_file4 = out_dir +'/'+mappable_name+'/GC_plots/'+ bam_file_name+'.GC_bias.test.pdf'
 
 # #set up a figure for plotting
 # plot_indexes = np.arange(size_range[0]+GC_smoothing_step,size_range[1]+GC_smoothing_step,GC_smoothing_step)
@@ -444,7 +438,7 @@ plt.close('all')
 # axes[0,0].set_ylim(ylim)
 
 # old_title = axes[0,0].get_title()
-# axes[0,0].set_title(bam_file_name+'\n'+mapable_name + '\n' + old_title)
+# axes[0,0].set_title(bam_file_name+'\n'+mappable_name + '\n' + old_title)
 
 # fig.tight_layout()
 

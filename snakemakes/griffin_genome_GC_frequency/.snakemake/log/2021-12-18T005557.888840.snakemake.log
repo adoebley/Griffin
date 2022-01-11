@@ -1,0 +1,27 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	500	calc_GC_frequency
+	501
+
+[Sat Dec 18 00:55:58 2021]
+rule calc_GC_frequency:
+    input: /fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/genome/k100_minus_exclusion_lists.mappable_regions.hg38.bed
+    output: results/k100_minus_exclusion_lists.mappable_regions.hg38.348bp.GC_frequency.txt
+    jobid: 348
+    wildcards: out_dir=results, mappable_name=k100_minus_exclusion_lists.mappable_regions.hg38, length=348
+
+Terminating processes on user request, this might take some time.
+[Sat Dec 18 00:56:16 2021]
+Error in rule calc_GC_frequency:
+    jobid: 348
+    output: results/k100_minus_exclusion_lists.mappable_regions.hg38.348bp.GC_frequency.txt
+    shell:
+        time /fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/Griffin/scripts/griffin_calc_GC_frequency.py 		--mappable_regions_path /fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/genome/k100_minus_exclusion_lists.mappable_regions.hg38.bed 		--ref_seq /fh/fast/ha_g/grp/reference/GRCh38/GRCh38.fa 		--chrom_sizes /fh/fast/ha_g/grp/reference/GRCh38/hg38.standard.chrom.sizes 		--out_dir results 		--fragment_length 348 		--read_length 100
+        (exited with non-zero exit code)
+
+Complete log: /fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/Griffin/snakemakes/griffin_genome_GC_frequency/.snakemake/log/2021-12-18T005557.888840.snakemake.log

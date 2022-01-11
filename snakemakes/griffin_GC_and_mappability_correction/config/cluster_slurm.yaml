@@ -1,0 +1,28 @@
+#griffin_GC_correction.snakefile
+#Anna-Lisa Doebley
+#Template made 2021-04-06
+#Ha Lab
+#Fred Hutchinson Cancer Research Center
+
+__default__:
+    partition: campus-new
+    time: "24:0:0"
+    mem: 1G
+    ncpus: 1
+    ntasks: 1
+    output: logs/cluster/{rule}.{wildcards.samples}.%A.out
+    JobName: "{rule}.{wildcards.samples}"
+
+GC_counts: #this can take many days for large bams. Inrease the CPU to analyze more reads in parallel.
+    time: "48:0:0" 
+    ncpus: 8
+    mem: 8G
+
+mappability_bias: #this can take many days for large bams. Inrease the CPU to analyze more reads in parallel.
+    time: "48:0:0" 
+    ncpus: 8
+    mem: 8G
+
+make_samples_yaml:
+    output: logs/cluster/{rule}.%A.out
+    JobName: "{rule}"

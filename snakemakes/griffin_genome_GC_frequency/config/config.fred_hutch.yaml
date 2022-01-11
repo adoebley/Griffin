@@ -1,0 +1,24 @@
+
+#griffin_GC_frequency.snakefile
+#Anna-Lisa Doebley
+#Template made 2021-04-06
+#Ha Lab
+#Fred Hutchinson Cancer Research Center
+
+griffin_scripts_dir: /fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/Griffin/scripts
+
+#specify all mappable, non excluded regions (bed format)
+mappable_regions: /fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/genome/k100_minus_exclusion_lists.mappable_regions.hg38.bed
+
+reference_genome: 
+  /fh/fast/ha_g/grp/reference/GRCh38/GRCh38.fa
+
+chrom_sizes: 
+  /fh/fast/ha_g/grp/reference/GRCh38/hg38.standard.chrom.sizes
+
+out_dir: 
+  results_test
+
+size_range: [1,500]
+
+read_length: 100
