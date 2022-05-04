@@ -5,16 +5,17 @@
 #Ha Lab
 #Fred Hutchinson Cancer Research Center
 
-mapable_regions: #The genome GC frequencies
-  ../downloads/genome/repeat_masker.mapable.k50.Umap.hg38.bedGraph
+griffin_scripts_dir: ../../scripts
 
-reference_genome: 
-  /fh/fast/ha_g/grp/reference/GRCh38/GRCh38.fa
+#specify all mappable, non excluded regions (bed format)
+mappable_regions: ../../Ref/k100_minus_exclusion_lists.mappable_regions.hg38.bed
 
-chrom_sizes: 
-  /fh/fast/ha_g/grp/reference/GRCh38/hg38.standard.chrom.sizes
+reference_genome: ../../Ref/GRCh38.fa
 
-out_dir: 
-  results
+chrom_sizes: ../../Ref/hg38.standard.chrom.sizes
+
+out_dir: results
 
 size_range: [1,500]
+
+read_length: 100

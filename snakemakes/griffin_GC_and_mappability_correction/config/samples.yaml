@@ -1,0 +1,3 @@
+samples:
+  sample_name_1: /path/to/sample_1.bam
+  sample_name_2: /path/to/sample_2.bam
