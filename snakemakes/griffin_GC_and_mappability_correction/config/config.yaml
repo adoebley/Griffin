@@ -18,6 +18,7 @@ chrom_sizes: ../../Ref/hg38.standard.chrom.sizes
 
 #file containing mappability value for each bp in the genome 
 mappability_bw: ../../Ref/k100.Umap.MultiTrackMappability.bw
+mappability_correction: False #whether to run a mappability correction step, we found that this does not improve signals and we do not recommend it 
 
 #bed file containing regions to exclude
 encode_exclude: ../../Ref/encode_unified_GRCh38_exclusion_list.bed
