@@ -20,7 +20,6 @@ tmp_dir: tmp #where your temporary outputs will go (may be large)
 
 reference_genome: ../../Ref/hg38.fa
 mappability_bw: ../../Ref/k100.Umap.MultiTrackMappability.bw
-mappability_correction: False
 
 chrom_sizes_path: ../../Ref/hg38.standard.chrom.sizes
 
