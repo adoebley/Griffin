@@ -1,0 +1,8 @@
+samples:
+  sample_name_1:
+    bam: /path/to/sample1.bam
+    GC_bias: /path/to/sample1.GC_bias.txt
+  sample_name_2:
+    bam: /path/to/sample2.bam
+    GC_bias: /path/to/sample2.GC_bias.txt
+ 

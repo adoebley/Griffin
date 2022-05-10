@@ -1,0 +1,46 @@
+#griffin_GC_correction.snakefile
+#Anna-Lisa Doebley
+#Template made 2021-04-06
+#Ha Lab
+#Fred Hutchinson Cancer Research Center
+
+griffin_scripts_dir: ../../scripts
+
+#################
+#mappability bias params##
+#################
+# #SELECT CORRECT REFERENCE GENOME
+# #reference genome for alignment, with index files in same folder as .fa file
+reference_genome: ../../Ref/hg38.fa
+
+#chrom sizes for the selected reference genome
+chrom_sizes: ../../Ref/hg38.standard.chrom.sizes 
+
+#file containing mappability value for each bp in the genome 
+mappability_bw: ../../Ref/k100.Umap.MultiTrackMappability.bw
+mappability_correction: False #whether to run a mappability correction step, we found that this does not improve signals and we do not recommend it 
+
+#bed file containing regions to exclude
+encode_exclude: ../../Ref/encode_unified_GRCh38_exclusion_list.bed
+centromeres: ../../Ref/hg38_centromeres.bed
+gaps: ../../Ref/hg38_gaps.bed
+patches: ../../Ref/hg38_fix_patches.bed
+alternative_haplotypes: ../../Ref/hg38_alternative_haplotypes.bed
+
+#where the GC bias output will go
+out_dir: results
+
+#minimum mapping quality to keep a read
+map_quality: 20
+
+
+#################
+#GC bias params##
+#################
+mappable_regions: ../../Ref/k100_minus_exclusion_lists.mappable_regions.hg38.bed
+
+#folder with the gc frequencies for all fragment sizes in the mapable regions (must match the mapable_regions)
+#For typical hg38 WGS the correct path is below
+genome_GC_frequency: ../../Ref/genome_GC_frequency
+
+GC_bias_size_range: 15 500

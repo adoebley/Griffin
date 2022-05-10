@@ -1,1 +1,1 @@
-Github doesn't allow empty directories
+Github doesn't allow empty folders

@@ -1,0 +1,3 @@
+site_lists:
+  site_name1: /path/to/sites1.txt
+  site_name2: /path/to/sites2.txt
