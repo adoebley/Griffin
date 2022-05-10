@@ -436,7 +436,7 @@ def collect_fragments(input_list):
     ref_seq.close()
     
     
-    if (i+1)%100==0:
+    if (i+1)%1000==0:
         printout = griffin_functions.progress_report([chrom,start,end],'intervals',start_time,time.time(),i,len(to_fetch))
         print(printout)
         sys.stdout.flush()
