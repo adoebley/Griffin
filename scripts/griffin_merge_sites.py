@@ -26,44 +26,40 @@ import pybedtools
 # %matplotlib inline
 
 # #sample specific params for testing
-# sample_name = 'MBC_1041_1_ULP'
-# uncorrected_bw_path = 'tmp/MBC_1041_1_ULP/tmp_bigWig/MBC_1041_1_ULP.uncorrected.bw'
-# GC_corrected_bw_path = 'tmp/MBC_1041_1_ULP/tmp_bigWig/MBC_1041_1_ULP.GC_corrected.bw'
-# GC_map_corrected_bw_path = 'tmp/MBC_1041_1_ULP/tmp_bigWig/MBC_1041_1_ULP.GC_map_corrected.bw'
-# mappability_correction = 'True'
+# # sample_name = '17_P-0043_sclc_patient_L-0283_v2'
+# # uncorrected_bw_path = 'tmp/17_P-0043_sclc_patient_L-0283_v2/tmp_bigWig/17_P-0043_sclc_patient_L-0283_v2.uncorrected.bw'
+# # GC_corrected_bw_path = 'tmp/17_P-0043_sclc_patient_L-0283_v2/tmp_bigWig/17_P-0043_sclc_patient_L-0283_v2.GC_corrected.bw'
 
-# # GC_map_corrected_bw_path = 'none'
-# # mappability_correction = 'False'
 
-# # sample_name = 'HD45.ctDNA.WGS.FC19269447'
-# # uncorrected_bw_path = 'tmp/HD45.ctDNA.WGS.FC19269447/tmp_bigWig/HD45.ctDNA.WGS.FC19269447.uncorrected.bw'
-# # GC_corrected_bw_path = 'tmp/HD45.ctDNA.WGS.FC19269447/tmp_bigWig/HD45.ctDNA.WGS.FC19269447.GC_corrected.bw'
-# # GC_map_corrected_bw_path = 'tmp/HD45.ctDNA.WGS.FC19269447/tmp_bigWig/HD45.ctDNA.WGS.FC19269447.GC_map_corrected.bw'
+# sample_name = 'LX33B_P-0094_sclc_pdx_L-0342_v2'
+# uncorrected_bw_path = 'tmp/LX33B_P-0094_sclc_pdx_L-0342_v2/tmp_bigWig/LX33B_P-0094_sclc_pdx_L-0342_v2.uncorrected.bw'
+# GC_corrected_bw_path = 'tmp/LX33B_P-0094_sclc_pdx_L-0342_v2/tmp_bigWig/LX33B_P-0094_sclc_pdx_L-0342_v2.GC_corrected.bw'
+
+# GC_map_corrected_bw_path = 'none'
+# mappability_correction = 'False'
 
 # tmp_dir = 'tmp'
 # results_dir = 'results'
 
-# mappability_bw='../../../../griffin_revisions_1/genome/k100.Umap.MultiTrackMappability.hg38.bw'
+# mappability_bw='/fh/fast/ha_g/user/adoebley/projects/griffin_paper/downloads/genome/k50.Umap.MultiTrackMappability.hg38.bw'
 # chrom_sizes_path = '/fh/fast/ha_g/grp/reference/GRCh38/hg38.standard.chrom.sizes'
 
 # # #additional params for testing
-# sites_yaml = '/fh/fast/ha_g/user/adoebley/projects/griffin_revisions_1/MBC/CNA_correction_100kb_ATAC_np/config/sites.yaml'
-# # sites_yaml = '/fh/fast/ha_g/user/adoebley/projects/nucleosome_profiling_griffin/add_mappability_3/sites/test_sites.yaml'
+# sites_yaml = 'targeted_test_sites.yaml'
 
 # griffin_scripts_dir = '../'
 
 # chrom_column = 'Chrom'
-# position_column = 'position'
+# position_column = 'TFBS'
 # strand_column = 'Strand'
-# chroms = ['chr'+str(m) for m in np.arange(1,23)]
+# chroms = ['chr'+str(m) for m in np.arange(1,23)]+['chrX']
 
-# # norm_window = [-250000, 250000]
-# norm_window = [-5000, 5000] #for testing
+# norm_window = [-500, 500] #for testing
 
-# save_window = [-1000, 1000]#for testing
+# save_window = [-500, 500]#for testing
 # center_window = [-30,30] #define the center of the interval for feature calculation
-# fft_window = [-960,960]
-# fft_index = 10
+# fft_window = [-480,480]
+# fft_index = 5
 # smoothing_length = 167 #fragment_length
 
 # encode_exclude = '../../../../griffin_revisions_1/genome/encode_unified_GRCh38_exclusion_list.bed'
@@ -75,27 +71,20 @@ import pybedtools
 # exclude_paths = [encode_exclude,centromere_path,gap_path,patch_path,alternative_haplotype_path]
 # del(encode_exclude,centromere_path,gap_path,patch_path)
 
-# # exclude_paths = ['none']
-
 # step = 15
 
-# # CNA_normalization = 'False'
-# CNA_normalization = 'False'
+# targeted_panel = '/fh/fast/ha_g/user/adoebley/data/SCLC_targeted_panel_sites/copies_from_joe/BOTH_panels_99203579_95366096.bed' #false or bed file of targeted regions
+# CNA_normalization = 'True'
 
-# individual = 'False'
+# individual = 'True'
 # smoothing = 'True'
 
 # exclude_outliers_parameter = 'True'
 # exclude_zero_mappability_parameter = 'True'
 
-# # number_of_sites = 'none'
-# # sort_by = 'none'
-# # ascending = 'none'
-
-# number_of_sites = 500
-# sort_by = 'Chrom'
-# #sort_by = 'peak.count'
-# ascending = 'False'
+# number_of_sites = 'none'
+# sort_by = 'none'
+# ascending = 'none'
 
 # CPU = 1
 
@@ -136,7 +125,8 @@ parser.add_argument('--exclude_paths', help='path to bed files of regions to fil
 
 parser.add_argument('--step',help='step size when calculating coverage', type=int, default=5)
 
-parser.add_argument('--CNA_normalization',help='whether to normalize each site individually to the copy number within the normalization window',default='False', required = True)
+parser.add_argument('--targeted_panel',help = 'Option to exclude off target regions in targeted panel data. "False" for whole genome sequencing or path to a bed file of targets.',default='False', required = True)
+parser.add_argument('--CNA_normalization',help='whether to normalize each site individually to the copy number within the normalization window (True/False)',default='False', required = True)
 parser.add_argument('--individual',help='save individual site coverage. TRUE WILL RESULT IN HUGE OUTPUT FILES. (True/False)',default='False', required = True)
 parser.add_argument('--smoothing',help='whether to use a savgol filter to smooth sites (True/False)', default = 'True', required = True)
 
@@ -182,6 +172,7 @@ exclude_paths = args.exclude_paths
 
 step = args.step
 
+targeted_panel = args.targeted_panel
 CNA_normalization = args.CNA_normalization
 individual = args.individual
 smoothing = args.smoothing
@@ -293,6 +284,31 @@ import griffin_functions
 # In[ ]:
 
 
+#if it is a targeted panel, convert to bw format for easy filtering
+if not targeted_panel.lower()=='false':
+    print('filtering sites by targeted panel')    
+    targeted_panel_bed = pybedtools.BedTool(targeted_panel)
+    targeted_panel_bed = targeted_panel_bed.sort()
+    targeted_panel_bed = targeted_panel_bed.merge()
+    targeted_panel_df = targeted_panel_bed.to_dataframe()
+    targeted_panel_df = targeted_panel_df[targeted_panel_df['chrom'].isin(chroms)]
+    pybedtools.cleanup()
+    
+    #move to bw file
+    chrom_sizes = pd.read_csv(chrom_sizes_path, sep='\t', header=None)
+    chrom_sizes = chrom_sizes[chrom_sizes[0].isin(chroms)]
+    
+    targeted_panel_bw = pyBigWig.open(tmp_bigWig+"/targeted_panel.bw", "w")
+    targeted_panel_bw.addHeader([(a,b) for a,b in chrom_sizes.values])
+    targeted_panel_bw.addEntries(list(targeted_panel_df['chrom']), list(targeted_panel_df['start']), ends = list(targeted_panel_df['end']), values = [1.0 for m in range(len(targeted_panel_df))])  
+    targeted_panel_bw.close()
+else:
+    print('Not using a targeted panel')
+
+
+# In[ ]:
+
+
 if exclude_paths==['none']:
     print('No excluded regions.')
 
@@ -388,7 +404,7 @@ def fetch_bw_values(bw_path,current_sites,site_name,name):
 # In[ ]:
 
 
-def sum_bins(results,name):
+def sum_bins(results):
     #If a bin has an np.nan value, the whole bin will become np.nan
     summed = np.sum(results.values.reshape(len(results),int(len(results.columns)/step), step), axis = 2)    
     summed = pd.DataFrame(summed)
@@ -400,7 +416,7 @@ def sum_bins(results,name):
 # In[ ]:
 
 
-def exclude_regions(results,excluded_regions,name):
+def exclude_regions(results,excluded_regions):
     results = np.where(excluded_regions>0,np.nan,results)#if any bp in the bin were excluded (1) exclude the bin
     results = pd.DataFrame(results)
     results.columns = norm_columns
@@ -410,7 +426,17 @@ def exclude_regions(results,excluded_regions,name):
 # In[ ]:
 
 
-def exclude_zero_mappability(results,mappability_values,name):
+def exclude_off_target_regions(results,targeted_panel_regions):
+    results = np.where(targeted_panel_regions>0,results,np.nan)# if any bp in the bin overlap the targeted panel, keep the bin
+    results = pd.DataFrame(results)
+    results.columns = norm_columns
+    return(results)
+
+
+# In[ ]:
+
+
+def exclude_zero_mappability(results,mappability_values):
     results = np.where(mappability_values>0,results,np.nan)#only retain positions where the mappability is >0
     results = pd.DataFrame(results)
     results.columns = norm_columns
@@ -449,6 +475,11 @@ def normalize_and_smooth(results,site_name,name):
     mean_reads_per_bp_in_normalization_window = np.nanmean(results[norm_columns],axis = 1)/step
     mean_reads_per_bp_in_saved_window = np.nanmean(results[save_columns],axis = 1)/step
         
+    #count the fraction of positions that are removed by the exclusion filter
+    #do this before CNA normalizing to 1 because sites with zero reads will also become null after division
+    normalization_window_fraction_filtered = results[norm_columns].isnull().sum(axis = 1)/len(norm_columns)
+    saved_window_fraction_filtered = results[save_columns].isnull().sum(axis = 1)/len(save_columns)
+
     #normalize individual sites to 1 to remove CNA
     if CNA_normalization.lower() == 'true':
         print(site_name,name,'normalizing CNAs')
@@ -480,12 +511,15 @@ def normalize_and_smooth(results,site_name,name):
     print(site_name,name,'correcting for read depth')
     mean_value = np.nanmean(results[norm_columns])
     results[norm_columns] = results[norm_columns]/mean_value
-    
+        
     #save only plot columns 
     results = results[save_columns].copy()
     
     results['mean_reads_per_bp_in_normalization_window'] = mean_reads_per_bp_in_normalization_window
     results['mean_reads_per_bp_in_saved_window'] = mean_reads_per_bp_in_saved_window
+
+    results['normalization_window_fraction_filtered'] = normalization_window_fraction_filtered
+    results['saved_window_fraction_filtered'] = saved_window_fraction_filtered
     
     return(results)
 
@@ -519,17 +553,17 @@ def merge_sites(input_list):
     #fetch coverage and sum into bins of length step
     for key in results_dict.keys():
         results_dict[key]['coverage'] = fetch_bw_values(results_dict[key]['input_path'],current_sites,site_name,key)
-        results_dict[key]['coverage'] = sum_bins(results_dict[key]['coverage'],key)
-    
+        results_dict[key]['coverage'] = sum_bins(results_dict[key]['coverage'])
+        
     #exclude specified regions
     if not exclude_paths == ['none']:
         print(site_name+' - excluding specified regions.')
         regions_to_exclude = fetch_bw_values(tmp_bigWig+"/excluded_regions.bw",current_sites,site_name,'to_exclude')
-        regions_to_exclude = sum_bins(regions_to_exclude,'to_exclude')
+        regions_to_exclude = sum_bins(regions_to_exclude)
         for key in results_dict.keys():
-            results_dict[key]['coverage'] = exclude_regions(results_dict[key]['coverage'],regions_to_exclude,key)
+            results_dict[key]['coverage'] = exclude_regions(results_dict[key]['coverage'],regions_to_exclude)
         del(regions_to_exclude)
-
+    
     #exclude zero mappability
     if exclude_zero_mappability_parameter.lower()=='true':
         print(site_name+' - excluding zero mappability.')
@@ -538,12 +572,21 @@ def merge_sites(input_list):
         #replace zero with np.nan for mappability
         #when summing bins, any bin with one or more zeros will now be np.nan
         mappability_values[all_positions] = np.where(mappability_values[all_positions]==0,np.nan,mappability_values[all_positions])
-        mappability_values = sum_bins(mappability_values,'mappability')
+        mappability_values = sum_bins(mappability_values)
         
         for key in results_dict.keys():
-            results_dict[key]['coverage'] = exclude_zero_mappability(results_dict[key]['coverage'],mappability_values,key)
+            results_dict[key]['coverage'] = exclude_zero_mappability(results_dict[key]['coverage'],mappability_values)
         del(mappability_values)
-
+        
+    #exclude off target regions
+    if not targeted_panel.lower() == 'false':
+        print(site_name+' - excluding off target regions.')
+        targeted_regions = fetch_bw_values(tmp_bigWig+"/targeted_panel.bw",current_sites,site_name,'targeted_panel')
+        targeted_regions = sum_bins(targeted_regions)
+        for key in results_dict.keys():
+            results_dict[key]['coverage'] = exclude_off_target_regions(results_dict[key]['coverage'],targeted_regions)
+        del(targeted_regions)
+        
     #mask out bins with coverage >10 SD above the mean
     if exclude_outliers_parameter.lower()=='true':
         print(site_name+' - excluding outliers.')
@@ -559,7 +602,7 @@ def merge_sites(input_list):
     for key in results_dict.keys():
         results_dict[key]['coverage'] = normalize_and_smooth(results_dict[key]['coverage'],site_name,key)
     sys.stdout.flush()
-
+    
     #get features
     for key in results_dict.keys():
         results_dict[key]['coverage'] = calculate_features(results_dict[key]['coverage'])
@@ -620,6 +663,7 @@ sys.stdout.flush()
 # In[ ]:
 
 
+#export results
 for key in results_dict_template.keys():
     current_results = pd.DataFrame()
     for i in range(len(results)):
@@ -631,12 +675,21 @@ for key in results_dict_template.keys():
 # In[ ]:
 
 
+if not exclude_paths==['none']:
+    os.remove(tmp_bigWig+"/excluded_regions.bw")
+if not targeted_panel.lower()=='false':
+    os.remove(tmp_bigWig+"/targeted_panel.bw")
+
+
+# In[ ]:
+
+
 # # plt.plot(save_columns, results[0]['uncorrected']['coverage'][save_columns].mean())
 # # plt.plot(save_columns, results[0]['GC_corrected']['coverage'][save_columns].mean())
 # # plt.plot(save_columns, results[0]['GC_map_corrected']['coverage'][save_columns].mean())
 
 # for i in range(len(results)):
-#     df = results[i]['GC_map_corrected']['coverage']
+#     df = results[i]['GC_corrected']['coverage']
 #     site_name = df['site_name'].values[0]
 #     plt.plot(save_columns, df[save_columns].mean(), label= site_name)
 # plt.legend()
@@ -646,14 +699,17 @@ for key in results_dict_template.keys():
 # In[ ]:
 
 
-if not exclude_paths==['none']:
-    os.remove(tmp_bigWig+"/excluded_regions.bw")
-
-
-# In[ ]:
-
-
-
+# for j in range(1):
+#     for i in range(len(results)):
+#         df = results[i]['GC_corrected']['coverage'].iloc[j]
+#         site_name = df['site_name']
+#         site_chrom = df['Chrom']
+#         site_pos = df['TFBS']
+        
+#         plt.plot(save_columns, df[save_columns], label= site_name+' '+site_chrom+' '+str(site_pos))
+#     plt.legend()
+#     plt.title(sample_name);  
+#     plt.show()
 
 
 # In[ ]:

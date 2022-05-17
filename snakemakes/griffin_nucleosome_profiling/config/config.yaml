@@ -57,6 +57,7 @@ alternative_haplotypes: ../../Ref/hg38_alternative_haplotypes.bed
 
 step: 15
 
+targeted_panel: False #False for WGS or path/to/targets.bed for targeted sequencing data
 CNA_normalization: False
 individual: False
 smoothing: True

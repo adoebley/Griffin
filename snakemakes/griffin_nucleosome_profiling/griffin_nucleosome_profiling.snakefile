@@ -132,6 +132,7 @@ rule merge_sites:
 
 		step = config['step'],
 
+		targeted_panel = config['targeted_panel'],
 		CNA_normalization = config['CNA_normalization'],
 		individual = config['individual'],
 		smoothing = config['smoothing'],
@@ -170,6 +171,7 @@ rule merge_sites:
 		--smoothing_length {params.smoothing_length} \
 		--exclude_paths {params.encode_exclude} {params.centromeres} {params.gaps} {params.patches} {params.alternative_haplotypes} \
 		--step {params.step} \
+		--targeted_panel {params.targeted_panel} \
 		--CNA_normalization {params.CNA_normalization} \
 		--individual {params.individual} \
 		--smoothing {params.smoothing} \
