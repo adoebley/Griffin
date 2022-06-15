@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 import os
@@ -156,6 +156,7 @@ print('\tsample_name = "'+sample_name+'"')
 print('\tbam_path = "'+bam_path+'"')
 print('\tGC_bias_path = "'+GC_bias_path+'"')
 print('\tmappability_bias_path = "'+mappability_bias_path+'"')
+print('\tmappability_correction = "'+mappability_correction+'"')
 
 print('\ttmp_dir = "'+tmp_dir+'"')
 
@@ -303,7 +304,7 @@ for site_name in sites.keys():
 #number of bp to fetch upstream and downstream of the site
 upstream_bp = norm_window[0]-sz_range[0] #this should be negative
 downstream_bp = norm_window[1]+sz_range[0] #this should be positive
-all_sites = griffin_functions.define_fetch_interval('Total sites',all_sites,chrom_column,position_column,
+all_sites = griffin_functions.define_fetch_interval('Total sites',all_sites,strand_column,chrom_column,position_column,
                                                     chroms,chrom_sizes_path,upstream_bp,downstream_bp)
 
 

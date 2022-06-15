@@ -32,16 +32,16 @@ def import_and_filter_sites(site_name,site_file,strand_column,chrom_column,posit
 # In[2]:
 
 
-def define_fetch_interval(name_to_print,sites,chrom_column,position_column,chroms,chrom_sizes_path,upstream_bp,downstream_bp):
+def define_fetch_interval(name_to_print,sites,strand_column,chrom_column,position_column,chroms,chrom_sizes_path,upstream_bp,downstream_bp):
     import pandas as pd
     import numpy as np
     #separate fw and reverse sites
     fw_markers = ['+',1,'1']
     rv_markers = ['-',-1,'-1']
-    fw_sites = sites[sites['Strand'].isin(fw_markers)].copy()
-    rv_sites = sites[sites['Strand'].isin(rv_markers)].copy()
+    fw_sites = sites[sites[strand_column].isin(fw_markers)].copy()
+    rv_sites = sites[sites[strand_column].isin(rv_markers)].copy()
 
-    undirected_sites = sites[~(sites['Strand'].isin(fw_markers+rv_markers))].copy()
+    undirected_sites = sites[~(sites[strand_column].isin(fw_markers+rv_markers))].copy()
 
     if len(rv_sites)+len(fw_sites)+len(undirected_sites)==len(sites):
         print(name_to_print+' (fw/rv/undirected/total): '+

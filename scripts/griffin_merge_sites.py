@@ -543,7 +543,7 @@ def merge_sites(input_list):
     site_name,site_file = input_list
     #get the site lists and define the fetch interval
     current_sites = griffin_functions.import_and_filter_sites(site_name,site_file,strand_column,chrom_column,position_column,chroms,ascending,sort_by,number_of_sites)   
-    current_sites = griffin_functions.define_fetch_interval(site_name,current_sites,chrom_column,position_column,chroms,chrom_sizes_path,norm_window[0],norm_window[1])
+    current_sites = griffin_functions.define_fetch_interval(site_name,current_sites,strand_column,chrom_column,position_column,chroms,chrom_sizes_path,norm_window[0],norm_window[1])
 
     sys.stdout.flush()
 
