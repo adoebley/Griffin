@@ -34,25 +34,7 @@ The analysis workflow consists of 4 tasks:
             - A config file for use in the nucleosome profiling step 
             - Copy this file into griffin_nucleosome_profiling/config/ to run the nucleosome profiling analysis on these samples
       
-3. griffin_filter_sites  
-    - If using a new set of sites (not previously filtered) you will need to filter them to remove low mappability sites.  
-    - If you have your own strategy for removing low mappability sites, you can skip this step but will need to add a column with the header 'position' to your site lists for subsequent steps.  
-     - To run this step:  
-        1. Create a sites.yaml with paths to your site lists and place it in config (see config/example_sites.yaml for format)  
-        2. Site lists must be tab separated with a header at the top. At a minimum they must contain a columns with the chromosome and a column with the position
-        3. Edit config.yaml to specify the location of your mappability track (k50.Umap.MultiTrackMappability.hg38.bw can be downloaded from: https://hgdownload.soe.ucsc.edu/gbdb/hg38/hoffmanMappability/k50.Umap.MultiTrackMappability.bw)  
-        4. Edit config.yaml to specify the name of the columns with the chromosome and position or beginning and end of an interval containing the site.  
-        5. Follow the directions at the top of griffin_filter_sites.snakefile to run the snakemake  
-      
-    - Outputs:  
-        1. sites/<site_list_name>.counts.txt  
-            - Summary of the number of low and high mappability sites  
-        2. sites/<site_list_name>.high_mapability.txt  
-            - high mappability sites to be used in subsequent steps  
-        3. sites/<site_list_name>.low_mapability.txt  
-            - low mappability sites  
-      
- 4. griffin_nucleosome_profiling  
+ 3. griffin_nucleosome_profiling  
     - Run nucleosome profiling for a given set of site lists and a given set of bam files  
     - To run this step:  
         1. Copy the samples.GC.yaml from the griffin_GC_correction step into the config directory  
