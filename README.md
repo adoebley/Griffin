@@ -6,29 +6,29 @@ A flexible framework for nucleosome profiling of cell-free DNA
 To run Griffin, use the snakemakes in the the 'snakemakes' directory  
 See the Griffin wiki (https://github.com/adoebley/Griffin/wiki) for further instructions and a demo.
 
-The methodology is described in:  
+The methodology (corresponding to release v0.1.0) is described in:  
 Doebley, et al. Griffin: Framework for clinical cancer subtyping from nucleosome profiling of cell-free DNA. (2021) MedRxiv. [doi: https://doi.org/10.1101/2021.08.31.21262867](https://doi.org/10.1101/2021.08.31.21262867)
 
-The analysis workflow consists of 4 tasks: 
+The analysis workflow consists of 3 tasks: 
 
 1. griffin_genome_GC_frequncy  
     - Calculate the frequency of fragments with each GC content across the mappable regions of the reference genome  
     - For hg38, this step is already complete and results are in Ref/genome_GC_frequency  
     - Griffin has not been tested on genome builds other than hg38, but this snakemake is provided in case you would like to try a different genome build or different filter for mappable regions (ex. shorter or longer reads)  
     
-2. griffin_GC_correction  
-    - Calculate the GC bias for a given set of bam files  
+2. griffin_GC_and_mappability_correction  
+    - Calculate the GC bias for a given set of bam files (mappability correction has been turned off by default) 
     - To run this step:  
         1. Create a samples.yaml with your list of bam files and place it in config (see config/example_samples.yaml for format)  
         2. Edit config.yaml to provide the path to the reference genome (hg38)  
         3. Follow the directions at the top of griffin_GC_correction.snakemake to run the snakemake  
       
     - Outputs:  
-        1. repeat_masker.mapable.k50.Umap.hg38/GC_bias/<sample_name>.GC_bias.txt  
-            - The GC bias of fragments with each length and GC content, this is used for GC correction  
-        2. repeat_masker.mapable.k50.Umap.hg38/GC_counts/<sample_name>.GC_counts.txt  
+        1. results/GC_counts/<sample_name>.GC_counts.txt  
             - Intermediate file with the number of fragments with each length and GC content  
-        3. repeat_masker.mapable.k50.Umap.hg38/GC_plots/  
+        2. results/GC_bias/<sample_name>.GC_bias.txt  
+            - The GC bias of fragments with each length and GC content, this is used for GC correction  
+        3. results/GC_plots/  
             - Assorted plots of the GC bias for each sample  
         4. samples.GC.yaml  
             - A config file for use in the nucleosome profiling step 
