@@ -124,8 +124,8 @@ for i in range(len(mappable_intervals)):
     if adjusted_start<0:
         adjusted_start = 0
     if adjusted_end>chrom_size_dict[chrom]:
-        adjusted_end = chrom_sizes_dict[chrom]
-        print(chrom,chrom_sizes_dict[chrom],'modifying_end_to_end_of_chromosome')
+        adjusted_end = chrom_size_dict[chrom]
+        print(chrom,chrom_size_dict[chrom],'modifying_end_to_end_of_chromosome')
     
     #count the GC content
     fetched = ref_seq.fetch(chrom,adjusted_start,adjusted_end)
@@ -174,8 +174,8 @@ for i in range(len(mappable_intervals)):
     if adjusted_start<0:
         adjusted_start = 0
     if adjusted_end>chrom_size_dict[chrom]:
-        adjusted_end = chrom_sizes_dict[chrom]
-        print(chrom,chrom_sizes_dict[chrom],'modifying_end_to_end_of_chromosome')
+        adjusted_end = chrom_size_dict[chrom]
+        print(chrom,chrom_size_dict[chrom],'modifying_end_to_end_of_chromosome')
 
     #count the GC content
     fetched = ref_seq.fetch(chrom,adjusted_start,adjusted_end)
