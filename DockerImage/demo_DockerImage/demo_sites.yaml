@@ -1,0 +1,2 @@
+site_lists:
+   CTCF_demo: ../../demo/griffin_nucleosome_profiling_demo_files/sites/CTCF.hg38.1000.txt
