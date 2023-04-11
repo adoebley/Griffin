@@ -15,3 +15,4 @@ dependencies:
   - pip:
       - snakemake==5.19.2
       - matplotlib==3.4.1
+      - scikit-learn==1.0.2
