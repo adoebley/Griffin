@@ -44,11 +44,12 @@ The analysis workflow consists of 3 tasks:
         5. Follow the directions at the top of griffin_nucleosome_profiling.snakefile to run the snakemake  
         
     - Outputs:  
-        1. results/coverage/all_sites/<sample_name>.all_sites.coverage.txt  
+        1. results/<sample_name>/<sample_name>.GC_corrected.coverage.tsv
+        2. results/<sample_name>/<sample_name>.uncorrected.coverage.tsv  
             - nucleosome profiles and metadata for each site list.   
-            - Both GC corrected and non-GC corrected profiles are in this file and must be separated for downstream analysis (GC_correction column). Coverage profile data is labeled with the start coordinate of the bin. For instance, the column labeled -15 contains the coverage information for -15bp to 0bp relative to the site location.  
-        2. results/coverage/<site_name>/<sample_name>.<site_name>.coverage.txt  
-            - These folders contain intermediate files with the coverage profiles for individual site lists. These have been concatenated into results/coverage/all_site/<sample_name>.all_sites.coverage.txt. 
+            - Coverage profile data is labeled with the start coordinate of the bin. For instance, the column labeled -15 contains the coverage information for -15bp to 0bp relative to the site location.  
+        3. plots/<site_list>.pdf  
+            - coverage profile for all samples for a given site list, you'll likely want to replot these to make them look nicer
 
 ## Versions of packages used for testing  
 argparse 1.1  
