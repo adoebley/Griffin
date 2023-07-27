@@ -6,8 +6,11 @@ A flexible framework for nucleosome profiling of cell-free DNA
 To run Griffin, use the snakemakes in the the 'snakemakes' directory  
 See the Griffin wiki (https://github.com/adoebley/Griffin/wiki) for further instructions and a demo.
 
-The methodology (corresponding to release v0.1.0) is described in:  
-Doebley, et al. Griffin: Framework for clinical cancer subtyping from nucleosome profiling of cell-free DNA. (2021) MedRxiv. [doi: https://doi.org/10.1101/2021.08.31.21262867](https://doi.org/10.1101/2021.08.31.21262867)
+The methodology (corresponding to release v0.2.0) is described in:  
+Doebley, et al. A framework for clinical cancer subtyping from nucleosome profiling of cell-free DNA. (2022) Nature Communications. [doi: https://doi.org/10.1038/s41467-022-35076-w](https://doi.org/10.1038/s41467-022-35076-w)
+
+
+Release v0.1.0 corresponds to the 2021 preprint in MedRxiv. [doi: https://doi.org/10.1101/2021.08.31.21262867](https://doi.org/10.1101/2021.08.31.21262867)
 
 The analysis workflow consists of 3 tasks: 
 
