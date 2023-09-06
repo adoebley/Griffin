@@ -1,0 +1,5 @@
+samples:
+  Healthy_demo:
+    bam: ../../demo/bam/Healthy_GSM1833219_downsampled.sorted.mini.bam
+    GC_bias: ../../demo/griffin_GC_correction_demo_files/expected_results/Healthy_demo.GC_bias.txt
+ 
